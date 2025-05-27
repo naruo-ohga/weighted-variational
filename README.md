@@ -1,6 +1,7 @@
 # Weighted variational method
 
-This code implements the **weighted variational method** for constructing an approximate counterdiabatic (CD) driving protocol to enhance ground-state evolution of arbitrary spin-1/2 systems. See our paper at [arXiv:25xx.xxxxx](https://arxiv.org/abs/25xx.xxxxx).
+This code implements the **weighted variational method** for constructing an approximate counterdiabatic (CD) driving protocol to enhance ground-state evolution of arbitrary spin-1/2 systems. The details are found in our paper:
+* Naruo Ohga and Takuya Hatomura, Improving variational counterdiabatic driving with weighted actions and computer algebra, [arXiv:2505.18367](https://arxiv.org/abs/2505.18367) (2025).
 
 The code consists of two parts:
 * C++ code for calculating the driving coefficients by the weighted variational method.
