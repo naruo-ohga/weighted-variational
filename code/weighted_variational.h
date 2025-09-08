@@ -25,20 +25,49 @@
 #include <random>
 #include <algorithm>
 #include <Eigen/Dense>
+#include <Eigen/Sparse>
 #include "stopwatch.h"
 #include "pauli_alg.h"
 #include "weighted_variational_utility.h" // includes weighted_variational::utility functions
 using paulialg::PauliAlg;
 
 
-namespace weighted_variational{
+// ========== Global options ==========
 
-    // ========== Global option ==========
+// The method used for solving the linear equation Qa = r.
+#define WEIGHTED_VARIATIONAL_LINEAR_EQUATION_SOLVER 1
+// 1: Direct (exact) solver
+// 2: Iterative (approximate) solver
+
+namespace weighted_variational{
     // The size of the chunk for calculating the traces of operators.
     // Smaller chunks reduces the memory usage while larger chunks reduce the computational time.
     // If the program slows down due to memory shortage, try reducing this value.
     constexpr const std::size_t chunk_size = 1 << 20; // 2^20 = 1048576
 
+    // Tolerance for the iterative solver. 
+    // Used only if WEIGHTED_VARIATIONAL_LINEAR_EQUATION_SOLVER == 2.
+    constexpr const double linear_equation_solver_tol = 1e-14;
+} // namespace weighted_variational
+
+
+
+namespace weighted_variational{
+    // ========== Linear equation solver ==========
+    #if WEIGHTED_VARIATIONAL_LINEAR_EQUATION_SOLVER == 1
+        // Direct (exact) solver
+        Eigen::MatrixXd linear_equation_solver(const Eigen::MatrixXd& Q, const Eigen::VectorXd& r){
+            return Q.colPivHouseholderQr().solve(r);
+        }
+    #elif WEIGHTED_VARIATIONAL_LINEAR_EQUATION_SOLVER == 2
+        // Iterative (approximate) solver
+        Eigen::VectorXd linear_equation_solver(const Eigen::MatrixXd& Q, const Eigen::VectorXd& r){
+            Eigen::ConjugateGradient<Eigen::MatrixXd, Eigen::Lower | Eigen::Upper> solver;
+            solver.setTolerance(weighted_variational::linear_equation_solver_tol); 
+            solver.compute(Q);
+            return solver.solve(r);
+        }
+    #endif
 
 
     // =============================================================================
@@ -318,7 +347,7 @@ namespace weighted_variational{
 
         // ========== Solve the linear equation Qa = r ==========
         std::cout << "Solving the linear equation Qa = r" << std::endl;
-        Eigen::VectorXd a = Q.colPivHouseholderQr().solve(r);
+        Eigen::VectorXd a = weighted_variational::linear_equation_solver(Q, r);
 
         // Copy the solution to a std::vector object
         std::vector<double> a_vec(M_, 0.0);
@@ -1036,7 +1065,7 @@ namespace weighted_variational{
 
 
             // ===== Solve the linear equation Qa = r =====
-            Eigen::VectorXd a = Q.colPivHouseholderQr().solve(r);
+            Eigen::VectorXd a = weighted_variational::linear_equation_solver(Q, r);
 
             // copy the result to std::vector
             CD_coeff_series[li] = std::vector<double>(M_, 0.0);
