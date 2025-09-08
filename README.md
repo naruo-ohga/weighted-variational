@@ -7,7 +7,7 @@ The code consists of two parts:
 * C++ code for calculating the driving coefficients by the weighted variational method.
 * Python code that supports quantum simulation of the resulting CD driving.
 
-The C++ code is the main part of this repository. The Python code is optional; one can use other ways to realize the CD driving, such as real quantum systems and other classical simulators.
+The C++ code is the main part of this repository. The Python code is optional; one can use other frameworks to implement the CD driving, such as real quantum systems and other classical simulators.
 
 
 ## I. Quick start
@@ -134,8 +134,9 @@ The following files are for demonstration.
 ### paper/
 
 This directory contains data presented in the paper and codes used to generate the data. 
-* `data-main/`: Containing the data of the systematic test for ferromagnetic, antiferromagnetic, and spin-glass (Gaussian) systems with system sizes $`N = 9, 12, 15`$. Folders with "-YZ" represent the results with the two-body driving, and those without "-YZ" are the results with the one-body driving. The final fidelity are summarized in `example_Ising_final_fidelity.txt`.
-* `data-others/`: Containing other miscellaneous data presented in the paper.
+* Codes directly below `paper/` have been used to generate and plot the data. They are similar to the example codes in `code/` but with more complexity for the extensive, systematic test.
+* `data-main/`: Containing the data of the systematic test for ferromagnetic, antiferromagnetic, and spin-glass (Gaussian) systems with system sizes $`N = 9, 12, 15`$. Folders with "-YZ" represent the results with the two-body driving, and those without "-YZ" are the results with the one-body driving. The final fidelity is summarized in `data-main/example_Ising_final_fidelity.txt`.
+* `data-others/`: Containing other miscellaneous data presented in the paper: the run time of the C++ code, the data from the partial action decomposition, and the data of the perturbation analysis.
 
 ### test/
 
