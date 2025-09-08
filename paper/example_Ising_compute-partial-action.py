@@ -5,7 +5,7 @@ import pandas as pd
 
 
 # ===== Parameters =====
-parent_folder = 'data_and_figs_note5_Gaussian_std=1.0/'
+parent_folder = 'data-main/'
 K_list = loader.K_list
 driving_name = ''
 N = 12

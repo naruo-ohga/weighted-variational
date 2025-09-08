@@ -11,8 +11,8 @@ driving_name_list = ["", "-YZ"]
 K_list = loader.K_list
 
 perturb_ratio = 1.02
-parent_folder1 = 'data_and_figs_note5_Gaussian_std=1.0/' # without perturbation
-parent_folder2 = 'data_241117_hz1-1.02/' # with perturbation
+parent_folder1 = 'data-main' # without perturbation
+parent_folder2 = 'data-main_delta=1.02' # with perturbation
 
 columns = ['mu=' + str(mu) for mu in range(100)] # Too long. Automatically shortend
 
