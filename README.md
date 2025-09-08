@@ -63,7 +63,7 @@ One can modify the example in many ways. The following are some examples:
 
 ### Use PauliAlg class
 
-A `PauliAlg` object represents a linear combination of Pauli operators. To use the `PauliAlg` class, include the header file in your C++ program as follows:
+A `PauliAlg` object represents an arbitrary linear combination of tensor products of Pauli operators, allowing for the construction of any Hamiltonians and driving operators. To use the `PauliAlg` class, include the header file in your C++ program as follows:
 ```C++
 #include "pauli_alg.h"
 using paulialg::PauliAlg; // To abbreviate paulialg::PauliAlg to PauliAlg
@@ -98,7 +98,7 @@ PauliAlg::trace_normalized_multiply(A, B);   // Trace Tr(AB) / 2^N (returns a co
 ```
 The following expressions are not supported:
 ```C++
-// A / c  ->  Use (1.0 / c) * A` instead
+// A / c  ->  Use (1.0 / c) * A instead
 // A + c  ->  Use A + c * PauliAlg::identity(N) instead
 // A - c  ->  Use A - c * PauliAlg::identity(N) instead
 ```
@@ -133,7 +133,9 @@ The following files are for demonstration.
 
 ### paper/
 
-This directory contains codes we used to perform the numerical tests and generate figures in the paper. It also contains the data of the final fidelity (`example_Ising_final_fidelity.tsv`).
+This directory contains data presented in the paper and codes used to generate the data. 
+* `data-main/`: Containing the data of the systematic test for ferromagnetic, antiferromagnetic, and spin-glass (Gaussian) systems with system sizes $`N = 9, 12, 15`$. Folders with "-YZ" represent the results with the two-body driving, and those without "-YZ" are the results with the one-body driving. The final fidelity are summarized in `example_Ising_final_fidelity.txt`.
+* `data-others/`: Containing other miscellaneous data presented in the paper.
 
 ### test/
 
