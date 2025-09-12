@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 title: Weighted variational counterdiabatic driving
 message: The Zenodo page mirrors the GitHub repository.
+type: software
 authors:
   - given-names: Naruo
     family-names: Ohga
@@ -9,6 +10,10 @@ authors:
   - given-names: Takuya
     family-names: Hatomura
     orcid: 'https://orcid.org/0000-0002-0851-4183'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.17106270
 repository-code: 'https://github.com/naruo-ohga/weighted-variational'
+license: CC-BY-NC-4.0
 version: v1.0.0
 date-released: '2025-09-12'
